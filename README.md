@@ -1,104 +1,42 @@
-# Telugu Tokenizer
+# Telugu Tokenizer Demo
 
-A Unigram tokenizer specifically trained for the Telugu language using a large corpus of Telugu text from Wikipedia and news sources. This tokenizer is designed to efficiently handle Telugu text while maintaining high compression ratios.
+This is a demo of a custom Telugu tokenizer trained on a large corpus of Telugu text. The tokenizer is designed to efficiently handle Telugu text while maintaining high compression ratios.
 
-## Key Features
+## Features
 
-### Tokenizer Statistics
-- **Vocabulary Size**: 50000 tokens (✓ Exceeds requirement of 5000+)
-- **Compression Ratio**: 6.77 (✓ Meets requirement of ≥3.0)
-- **Average Token Length**: 6.26 characters
-- **Training Data**: 2,500+ Telugu articles
-- **Minimum Text Length**: 500 characters per article
-
-### Model Configuration
-- **Architecture**: Unigram Language Model
-- **Max Piece Length**: 128
-- **Sub-iterations**: 20
-- **Initial Vocabulary**: 50000 tokens
-- **Auto-scaling**: Up to 500,000 tokens if needed
-
-### Special Tokens
-- `<s>`: Start of text token
-- `</s>`: End of text token
-- `<unk>`: Unknown token
-- `<pad>`: Padding token
-- `<mask>`: Mask token (for potential MLM tasks)
-
-## Dataset Details
-- **Sources**:
-  - Telugu Wikipedia articles
-  - Major Telugu news websites
-  - Combined and cleaned text corpus
-- **Content**: Diverse topics including literature, culture, history, and general knowledge
-- **Preprocessing**:
-  - Removed references and citations
-  - Normalized whitespace
-  - Filtered short articles
-  - Cleaned special characters
-  - Combined short texts for better context
+- **Vocabulary Size**: 50,000+ tokens
+- **Compression Ratio**: >3.0
+- **Special Token Handling**: Includes [UNK], [CLS], [SEP], [PAD], [MASK]
+- **Telugu-specific**: Optimized for Telugu character set (Unicode range: \u0C00-\u0C7F)
 
 ## Usage
 
-### Installation
-```bash
-pip install tokenizers
-```
+1. Enter Telugu text in the input box
+2. Click "Submit"
+3. View the tokenization results:
+   - Tokens
+   - Token IDs
+   - Number of tokens
+   - Text length
+   - Compression ratio
 
-### Basic Usage
-```python
-from tokenizers import Tokenizer
+## Examples
 
-# Load the tokenizer
-tokenizer = Tokenizer.from_file("tokenizer.json")
+The demo includes several example texts showcasing different aspects of Telugu text:
+- Basic greetings
+- Simple sentences
+- Complex sentences
+- Long paragraphs
 
-# Encode text
-text = "నమస్కారం"  # Hello
-encoding = tokenizer.encode(text)
+## Tokenizer Source
 
-# Get tokens
-print("Tokens:", encoding.tokens)
-print("Token IDs:", encoding.ids)
-```
-
-### Example Outputs
-```python
-# Input: "తెలుగు భాష చాలా అందమైనది"
-# Output tokens: ['తెలుగు', ' భాష', ' చాలా', ' అంద', 'మైన', 'ది']
-```
+The tokenizer is available at: [https://huggingface.co/Saiteja/telugu-bpe](https://huggingface.co/Saiteja/telugu-bpe)
 
 ## Technical Details
 
-### Tokenizer Configuration
-- **Model**: Unigram Language Model (SentencePiece-style)
-- **Pre-tokenization**: ByteLevel + Character-level splitting
-- **Decoder**: ByteLevel
-- **Post-processor**: ByteLevel with trimmed offsets
-
-### Performance Metrics
-1. **Compression Ratio**: 6.77
-   - Calculated as: total_chars / total_tokens
-   - Higher ratio indicates better compression
-   - Median ratio: 7.05
-2. **Vocabulary Coverage**: 50000 unique tokens
-   - Includes special tokens
-   - Optimized for Telugu language patterns
-   - Auto-scales vocabulary size for better compression
-
-## Examples
-Check `examples.json` for more tokenization examples with different types of Telugu text, including:
-- Short phrases
-- Complete sentences
-- Long paragraphs
-- Various writing styles
-
-## Training Process
-The tokenizer was trained using the following steps:
-1. Collected 2,500+ Telugu articles from multiple sources
-2. Cleaned and preprocessed the text
-3. Combined short texts to create better context
-4. Trained Unigram model with initial vocab size of 50,000
-5. Auto-scaled vocabulary if needed for better compression
-6. Validated against requirements
+- Built using the 🤗 Tokenizers library
+- Uses WordPiece tokenization with Telugu-specific pre-tokenization rules
+- Handles Telugu Unicode characters effectively
+- Maintains high compression ratio while preserving token interpretability
 
 
