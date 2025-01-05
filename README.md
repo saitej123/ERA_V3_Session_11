@@ -101,8 +101,4 @@ The tokenizer was trained using the following steps:
 5. Auto-scaled vocabulary if needed for better compression
 6. Validated against requirements
 
-## License
-MIT License
 
-
-```
