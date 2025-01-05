@@ -1,15 +1,47 @@
 import gradio as gr
 from tokenizers import Tokenizer
 import json
+from huggingface_hub import hf_hub_download
+import os
+
+# Download tokenizer files from HF Hub
+def get_tokenizer():
+    try:
+        # Download tokenizer.json
+        tokenizer_path = hf_hub_download(
+            repo_id="Saiteja/telugu-bpe",
+            filename="tokenizer.json",
+            repo_type="model"
+        )
+        # Download examples.json
+        examples_path = hf_hub_download(
+            repo_id="Saiteja/telugu-bpe",
+            filename="examples.json",
+            repo_type="model"
+        )
+        return tokenizer_path, examples_path
+    except Exception as e:
+        print(f"Error downloading files: {e}")
+        return None, None
+
+# Get tokenizer and examples
+tokenizer_path, examples_path = get_tokenizer()
 
 # Load the tokenizer
-tokenizer = Tokenizer.from_file("telugu_tokenizer/tokenizer.json")
+tokenizer = Tokenizer.from_file(tokenizer_path)
 
-# Load examples from the examples.json file
-with open("telugu_tokenizer/examples.json", "r", encoding="utf-8") as f:
+# Load examples
+with open(examples_path, "r", encoding="utf-8") as f:
     examples_data = json.load(f)
 
 # Extract example texts
+# example_texts = [
+#     "నమస్కారం",  # Hello
+#     "తెలుగు భాష చాలా అందమైనది",  # Telugu language is very beautiful
+#     "భారతదేశం నా దేశం",  # India is my country
+#     "తెలుగు సాహిత్యం చాలా సమృద్ధిగా ఉంది",  # Telugu literature is very rich
+#     "నేను తెలుగు భాషను ప్రేమిస్తున్నాను"  # I love Telugu language
+# ]
 example_texts = [example["text"] for example in examples_data]
 
 def tokenize_text(text):
@@ -55,6 +87,6 @@ iface = gr.Interface(
 
 # Launch the app
 if __name__ == "__main__":
-    iface.launch(share=True)
+    iface.launch()
 
 
