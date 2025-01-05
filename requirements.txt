@@ -1,0 +1,7 @@
+tokenizers>=0.13.3
+datasets>=2.14.0
+huggingface_hub>=0.16.4
+sentencepiece>=0.1.99
+tqdm>=4.65.0
+requests>=2.31.0
+beautifulsoup4>=4.12.2 
