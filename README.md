@@ -1,3 +1,14 @@
+---
+title: Telugu Tokenizer Demo
+emoji: 🔤
+colorFrom: indigo
+colorTo: purple
+sdk: gradio
+sdk_version: "3.9.1"
+app_file: app.py
+pinned: false
+---
+
 # Telugu Tokenizer Demo
 
 This is a demo of a custom Telugu tokenizer trained on a large corpus of Telugu text. The tokenizer is designed to efficiently handle Telugu text while maintaining high compression ratios.
